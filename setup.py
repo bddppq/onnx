@@ -131,6 +131,11 @@ class Pybind11(Dependency):
         self.include_dirs = [os.path.join(TP_DIR, 'pybind11', 'include')]
 
 
+class Dlpack(Dependency):
+    def __init__(self):
+        super(Dlpack, self).__init__()
+        self.include_dirs = [os.path.join(TP_DIR, 'dlpack', 'include')]
+
 ################################################################################
 # Customized commands
 ################################################################################
@@ -327,7 +332,7 @@ class ONNXCpp2PyExtension(setuptools.Extension):
             if source_filter in self.sources:
                 self.sources.remove(source_filter)
 
-cpp2py_deps = [Pybind11(), Python()]
+cpp2py_deps = [Dlpack(), Pybind11(), Python()]
 cpp2py_link_args = []
 cpp2py_extra_objects = []
 build_for_release = os.getenv('ONNX_BINARY_BUILD')
